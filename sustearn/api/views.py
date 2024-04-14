@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Product
+from .models import Products
 from rest_framework import status
 import json
 
@@ -23,7 +23,7 @@ def calculate_footprint(request):
         x_values = get_x_values_from_llm(product_name, life_cycle_stages)
         weighted_average_emission = calculate_weighted_average_emission(x_values, weights)
 
-        product, created = Product.objects.update_or_create(
+        product, created = Products.objects.update_or_create(
             name=product_name,
             defaults={
                 'life_cycle_stages': life_cycle_stages,
