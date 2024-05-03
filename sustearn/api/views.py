@@ -21,8 +21,8 @@ def optimize_emission(weighted_average_emission, industry_lca):
 def calculate_footprint(request):
     try:
         product_name = request.data.get('name')
-        life_cycle_stages = request.data.get('life_cycle_stages')
-        weights = request.data.get('weights')
+        life_cycle_stages = request.data.get('life_cycle_stages') #LLM PROMPT REQUIRED!
+        weights = request.data.get('weights') #default - 100/ number of stages
 
         if not all([product_name, life_cycle_stages, weights]):
             return Response({'error': 'Missing data'}, status=status.HTTP_400_BAD_REQUEST)
