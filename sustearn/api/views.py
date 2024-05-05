@@ -5,11 +5,37 @@ from rest_framework import status
 import json
 
 
+
+# def send_gemini_request(prompt):
+#   """
+#   Sends a request to Gemini's API with the provided prompt.
+
+#   Args:
+#       prompt: The prompt to send to Gemini.
+
+#   Returns:
+#       A response object from the API call.
+#   """
+
+#   headers = {'Authorization': f'Bearer {GEMINI_API_KEY}'}
+#   url = "https://api.gemini.ai/v1/..."  # Replace with appropriate Gemini API endpoint
+
+#   # Adjust the request body and headers based on Gemini's API specifications
+#   data = {"prompt": prompt}
+#   response = requests.post(url, headers=headers, json=data)
+
+#   return response
+
+
 def fetch_industry_benchmark_lca(product_name):
     return 100  # Dummy industry benchmark LCA value
 
 def fetch_life_cycle_stages(product_name):
     return ['manufacturing', 'use_cycle_phase', 'transportation']
+
+def get_x_values_from_llm(product_name, life_cycle_stages):
+    return {'x1': 10, 'x2': 20, 'x3': 30}
+
 
 def optimize_emission(weighted_average_emission, industry_lca):
     lower_bound = industry_lca * (-20 / 100)
@@ -55,9 +81,6 @@ def calculate_footprint(request):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-def get_x_values_from_llm(product_name, life_cycle_stages):
-
-    return {'x1': 10, 'x2': 20, 'x3': 30}
 
 def calculate_weighted_average_emission(x_values, weights):
     x1, x2, x3 = x_values['x1'], x_values['x2'], x_values['x3']
