@@ -5,6 +5,7 @@ from rest_framework import status
 import json
 import requests
 import os
+import re
 
 
 import google.generativeai as genai
@@ -16,10 +17,20 @@ def fetch_life_cycle_stages(product_description, product_name):
     prompt = f"Given a product description '{product_description}', list the main life cycle stages of the product- '{product_name}'."
     response = model.generate_content(prompt)
 
-    life_cycle_stages = response.text.split("\n")
+    life_cycle_stages = []
+    for line in response.text.split("\n"):
+        if line.startswith("The main life cycle stages"):
+            continue  # Skip the introductory line
+        if line.strip().isdigit():
+            continue  # Skip empty or number-only lines
+        if '.' in line:
+            # Extract part after the number and period
+            stage = line.split('.', 1)[1].strip()
+            if stage:  # Ensure it's not empty
+                life_cycle_stages.append(stage)
 
     response_data = {
-        "life_cycle_stages": life_cycle_stages,
+        life_cycle_stages
     }
 
     return response_data
@@ -30,11 +41,11 @@ def fetch_industry_benchmark_lca(product_name):
     model = genai.GenerativeModel("gemini-pro")
     prompt = f"Provide a numerical value only on the industry benchmark Life-Cycle Assessment (LCA) for the product '{product_name}'."
     response = model.generate_content(prompt)
-
-    lca_data = response.text.split("\n")
+    match = re.search(r"\d+\.?\d*", response.text)
+    lca_data = float(match.group(0)) if match else None
 
     response_data = {
-        "industry_benchmark_lca": lca_data,
+        lca_data
     }
 
     return response_data
@@ -42,25 +53,6 @@ def fetch_industry_benchmark_lca(product_name):
 
 
 
-# @api_view(['POST'])
-# def fetch_industry_benchmark_lca(request):
-#     product_name = request.data['product_name']
-
-#     model = genai.GenerativeModel("gemini-pro")
-#     prompt = f"Provide a numerical value only on the industry benchmark Life-Cycle Assessment (LCA) for the product '{product_name}'."
-
-#     try:
-#         response = model.generate_content(prompt)
-#     except Exception as e:
-#         return Response({"error": "Error generating content: " + str(e)}, status=500)
-
-#     lca_data = response.text.split("\n")
-
-#     response_data = {
-#         "industry_benchmark_lca": lca_data,
-#     }
-    
-#     return Response(response_data)
 
 def get_x_values_from_llm(product_name, life_cycle_stages):
     return {'x1': 10, 'x2': 20, 'x3': 30}
