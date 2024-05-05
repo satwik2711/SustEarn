@@ -12,7 +12,7 @@ import google.generativeai as genai
 
 genai.configure(api_key='AIzaSyCr3BXiE3eqOSGGZe6UK0GUkgKaeHlOEBQ')
 
-def flcs(product_description, product_name):
+def fetch_life_cycle_stages(product_description, product_name):
     model = genai.GenerativeModel("gemini-pro")
     prompt = f"Given a product description '{product_description}', list the main life cycle stages of the product- '{product_name}'."
     response = model.generate_content(prompt)
@@ -53,7 +53,7 @@ def fetch_industry_benchmark_lca(product_name):
 
 
 
-def xv(product_name, life_cycle_stages):
+def get_x_values_from_llm(product_name, life_cycle_stages):
     model = genai.GenerativeModel("gemini-pro")
     
     # Extracting the list of life cycle stages from the dictionary if necessary
