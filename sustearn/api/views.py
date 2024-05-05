@@ -17,7 +17,6 @@ def optimize_emission(weighted_average_emission, industry_lca):
     if lower_bound < weighted_average_emission < upper_bound:
         return weighted_average_emission
     else:
-        #fitting in the bounds
         return max(min(weighted_average_emission, upper_bound), lower_bound)
 
 @api_view(['POST'])
@@ -27,7 +26,8 @@ def calculate_footprint(request):
         product_description = request.data.get('description')
 
         life_cycle_stages = fetch_life_cycle_stages(product_name)
-        weights = 100 / len(life_cycle_stages)
+        weight = 1 / len(life_cycle_stages)
+        weights = {stage: weight for stage in life_cycle_stages}
 
         if not all([product_name, product_description]):
             return Response({'error': 'Missing data'}, status=status.HTTP_400_BAD_REQUEST)
