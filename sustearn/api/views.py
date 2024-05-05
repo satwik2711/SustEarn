@@ -12,7 +12,7 @@ import google.generativeai as genai
 
 genai.configure(api_key='AIzaSyCr3BXiE3eqOSGGZe6UK0GUkgKaeHlOEBQ')
 
-def fetch_life_cycle_stages(product_description, product_name):
+def flcs(product_description, product_name):
     model = genai.GenerativeModel("gemini-pro")
     prompt = f"Given a product description '{product_description}', list the main life cycle stages of the product- '{product_name}'."
     response = model.generate_content(prompt)
@@ -30,7 +30,7 @@ def fetch_life_cycle_stages(product_description, product_name):
                 life_cycle_stages.append(stage)
 
     response_data = {
-        life_cycle_stages
+        "life_cycle_stages": life_cycle_stages
     }
 
     return response_data
@@ -45,7 +45,7 @@ def fetch_industry_benchmark_lca(product_name):
     lca_data = float(match.group(0)) if match else None
 
     response_data = {
-        lca_data
+        "lca_data": lca_data
     }
 
     return response_data
@@ -53,21 +53,25 @@ def fetch_industry_benchmark_lca(product_name):
 
 
 
-def get_x_values_from_llm(product_name, life_cycle_stages):
+def xv(product_name, life_cycle_stages):
     model = genai.GenerativeModel("gemini-pro")
+    
+    # Extracting the list of life cycle stages from the dictionary if necessary
+    if isinstance(life_cycle_stages, dict) and 'life_cycle_stages' in life_cycle_stages:
+        life_cycle_stages = life_cycle_stages['life_cycle_stages']
 
     x_values = {}
     
-    for i, stage in enumerate(life_cycle_stages, start=1):
-        prompt = f"Provide a numerical value only on the industry segment benchmark for products similar to '{product_name}' for the life cycle stage '{stage}'."
-        response = model.generate_content(prompt)
+    for stage in life_cycle_stages:
+        # Ensure stage is a string and not empty
+        if isinstance(stage, str) and stage.strip():
+            prompt = f"Provide a numerical value only on the industry segment benchmark for products similar to '{product_name}' for the life cycle stage '{stage}'."
+            response = model.generate_content(prompt)
 
-        match = re.search(r"\d+\.?\d*", response.text)
-        numerical_value = float(match.group(0)) if match else None
+            match = re.search(r"\d+\.?\d*", response.text)
+            numerical_value = float(match.group(0)) if match else None
        
-        x_values[f'x[{stage}]']= numerical_value
-        # x_values[f'x{i}'] = numerical_value
-
+            x_values[f'x[{stage}]'] = numerical_value
 
     return x_values
 
