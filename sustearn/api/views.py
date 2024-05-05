@@ -18,12 +18,31 @@ def send_gemini_request(prompt):
   response = requests.post(GEMINI_ENDPOINT, headers=headers, json=data)
   return response
 
+def fetch_life_cycle_stages(product_name, product_description):
+  """
+  Fetches life cycle stages using Gemini's API and prompt engineering.
+
+  Args:
+      product_name: Name of the product.
+      product_description: Description of the product.
+
+  Returns:
+      A list of life cycle stages or an empty list if unsuccessful.
+  """
+
+  prompt = f"Given a product description '{product_description}', identify the main life cycle stages involved in the making of '{product_name}'."
+
+  response = send_gemini_request(prompt)
+  life_cycle_stages = []
+  if response.status_code == 200:
+    lifecycle_data = json.loads(response.content)
+    life_cycle_stages = lifecycle_data.get('contents', [])[0].get('parts', [])[0].get('generatedText', "")
+
+  return life_cycle_stages
+
 
 def fetch_industry_benchmark_lca(product_name):
     return 100  # Dummy industry benchmark LCA value
-
-def fetch_life_cycle_stages(product_name):
-    return ['manufacturing', 'use_cycle_phase', 'transportation']
 
 def get_x_values_from_llm(product_name, life_cycle_stages):
     return {'x1': 10, 'x2': 20, 'x3': 30}
