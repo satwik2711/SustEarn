@@ -53,9 +53,24 @@ def fetch_industry_benchmark_lca(product_name):
 
 
 
-
 def get_x_values_from_llm(product_name, life_cycle_stages):
-    return {'x1': 10, 'x2': 20, 'x3': 30}
+    model = genai.GenerativeModel("gemini-pro")
+
+    x_values = {}
+    
+    for i, stage in enumerate(life_cycle_stages, start=1):
+        prompt = f"Provide a numerical value only on the industry segment benchmark for products similar to '{product_name}' for the life cycle stage '{stage}'."
+        response = model.generate_content(prompt)
+
+        match = re.search(r"\d+\.?\d*", response.text)
+        numerical_value = float(match.group(0)) if match else None
+       
+        x_values[f'x[{stage}]']= numerical_value
+        # x_values[f'x{i}'] = numerical_value
+
+
+    return x_values
+
 
 
 def optimize_emission(weighted_average_emission, industry_lca):
