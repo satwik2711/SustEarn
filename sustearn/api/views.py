@@ -8,6 +8,9 @@ import json
 def fetch_industry_benchmark_lca(product_name):
     return 100  # Dummy industry benchmark LCA value
 
+def fetch_life_cycle_stages(product_name):
+    return ['manufacturing', 'use_cycle_phase', 'transportation']
+
 def optimize_emission(weighted_average_emission, industry_lca):
     lower_bound = industry_lca * (-20 / 100)
     upper_bound = industry_lca * (20 / 100)
@@ -21,17 +24,13 @@ def optimize_emission(weighted_average_emission, industry_lca):
 def calculate_footprint(request):
     try:
         product_name = request.data.get('name')
-        life_cycle_stages = request.data.get('life_cycle_stages') #LLM PROMPT REQUIRED!
-        weights = request.data.get('weights') #default - 100/ number of stages
+        product_description = request.data.get('description')
 
-        if not all([product_name, life_cycle_stages, weights]):
+        life_cycle_stages = fetch_life_cycle_stages(product_name)
+        weights = 100 / len(life_cycle_stages)
+
+        if not all([product_name, product_description]):
             return Response({'error': 'Missing data'}, status=status.HTTP_400_BAD_REQUEST)
-
-        if isinstance(life_cycle_stages, str):
-            life_cycle_stages = json.loads(life_cycle_stages)
-        if isinstance(weights, str):
-            weights = json.loads(weights)
-
 
         x_values = get_x_values_from_llm(product_name, life_cycle_stages)
         weighted_average_emission = calculate_weighted_average_emission(x_values, weights)
