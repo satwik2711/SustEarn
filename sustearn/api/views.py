@@ -6,127 +6,61 @@ import json
 import requests
 import os
 
-# GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
-# GEMINI_API_KEY='AIzaSyABFKpWgwveZN9eh51lOHRctwmW5WTBpUU'
-# GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
-
-
-# import requests
-
-# GEMINI_API_KEY = 'AIzaSyABFKpWgwveZN9eh51lOHRctwmW5WTBpUU'
-# GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
-
-# def send_gemini_request(prompt):
-#     headers = {
-#         'Content-Type': 'application/json',
-#         'Authorization': f'Bearer {GEMINI_API_KEY}'
-#     }
-
-#     data = {
-#         'contents': [
-#             {
-#                 'parts': [
-#                     {'text': prompt}
-#                 ]
-#             }
-#         ]
-#     }
-
-#     response = requests.post(GEMINI_ENDPOINT, headers=headers, json=data)
-#     return response
-
-# def fetch_life_cycle_stages(product_description):
-#   """
-#   Fetches life cycle stages using Gemini's API and prompt engineering.
-
-#   Args:
-#       product_name: Name of the product.
-#       product_description: Description of the product.
-
-#   Returns:
-#       A list of life cycle stages or an empty list if unsuccessful.
-#   """
-
-#   prompt = f"Given a product description '{product_description}',list the main life cycle stages of the product."
-
-#   response = send_gemini_request(prompt)
-# #   life_cycle_stages = []
-# #   if response.status_code == 200:
-# #     lifecycle_data = json.loads(response.content)
-# #     life_cycle_stages = lifecycle_data.get('contents', [])[0].get('parts', [])[0].get('generatedText', "")
-#   print(response.json())
-# #   return response
 
 import google.generativeai as genai
 
-genai.configure(api_key="AIzaSyCr3BXiE3eqOSGGZe6UK0GUkgKaeHlOEBQ")
+genai.configure(api_key='AIzaSyCr3BXiE3eqOSGGZe6UK0GUkgKaeHlOEBQ')
 
-# def fetch_life_cycle_stages(product_description):
-#     """
-#     Fetches the life cycle stages of a product using the Gemini-pro model.
-
-#     Args:
-#         product_description (str): The description of the product.
-
-#     Returns:
-#         dict: A dictionary containing the life cycle stages and any other relevant data.
-#     """
-#     model = genai.GenerativeModel("gemini-pro")
-#     prompt = f"Given a product description '{product_description}', list the main life cycle stages of the product."
-#     response = model.generate_content(prompt)
-
-#     life_cycle_stages = response.text.split("\n")
-
-#     response_data = {
-#         "life_cycle_stages": life_cycle_stages,
-#     }
-
-#     return response_data
-
-
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-import google.generativeai as genai
-
-@api_view(['POST'])
-def fetch_life_cycle_stages(request):
-    """
-    Fetches the life cycle stages of a product using the Gemini-pro model.
-    Expects a POST request with JSON body containing 'product_description'.
-
-    Args:
-        request (HttpRequest): The HTTP request object containing the product description.
-
-    Returns:
-        Response: A DRF Response object containing the life cycle stages and any other relevant data.
-    """
-    # Extract product_description from the request data
-    product_description = request.data.get('product_description')
-    if not product_description:
-        return Response({"error": "Product description is required."}, status=400)
-
-    # Set up the Gemini-pro model
+def fetch_life_cycle_stages(product_description, product_name):
     model = genai.GenerativeModel("gemini-pro")
-    prompt = f"Given a product description '{product_description}', list the main life cycle stages of the product - bamboo toothbrush"
-    
-    # Generate the response from the model
+    prompt = f"Given a product description '{product_description}', list the main life cycle stages of the product- '{product_name}'."
     response = model.generate_content(prompt)
-    
-    # Parse the model's response
+
     life_cycle_stages = response.text.split("\n")
-    
-    # Prepare the response data
+
     response_data = {
         "life_cycle_stages": life_cycle_stages,
     }
-    
-    return Response(response_data)
 
-
+    return response_data
 
 
 def fetch_industry_benchmark_lca(product_name):
-    return 100  # Dummy industry benchmark LCA value
+
+    model = genai.GenerativeModel("gemini-pro")
+    prompt = f"Provide a numerical value only on the industry benchmark Life-Cycle Assessment (LCA) for the product '{product_name}'."
+    response = model.generate_content(prompt)
+
+    lca_data = response.text.split("\n")
+
+    response_data = {
+        "industry_benchmark_lca": lca_data,
+    }
+
+    return response_data
+
+
+
+
+# @api_view(['POST'])
+# def fetch_industry_benchmark_lca(request):
+#     product_name = request.data['product_name']
+
+#     model = genai.GenerativeModel("gemini-pro")
+#     prompt = f"Provide a numerical value only on the industry benchmark Life-Cycle Assessment (LCA) for the product '{product_name}'."
+
+#     try:
+#         response = model.generate_content(prompt)
+#     except Exception as e:
+#         return Response({"error": "Error generating content: " + str(e)}, status=500)
+
+#     lca_data = response.text.split("\n")
+
+#     response_data = {
+#         "industry_benchmark_lca": lca_data,
+#     }
+    
+#     return Response(response_data)
 
 def get_x_values_from_llm(product_name, life_cycle_stages):
     return {'x1': 10, 'x2': 20, 'x3': 30}
