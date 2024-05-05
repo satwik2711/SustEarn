@@ -3,28 +3,20 @@ from rest_framework.response import Response
 from .models import Products
 from rest_framework import status
 import json
+import requests
+import os
+
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
 
 
+def send_gemini_request(prompt):
 
-# def send_gemini_request(prompt):
-#   """
-#   Sends a request to Gemini's API with the provided prompt.
+  headers = {'Content-Type': 'application/json', 'Authorization': f'Bearer {GEMINI_API_KEY}'}
+  data = {'contents': [{'parts': [{'text': prompt}]}]}
 
-#   Args:
-#       prompt: The prompt to send to Gemini.
-
-#   Returns:
-#       A response object from the API call.
-#   """
-
-#   headers = {'Authorization': f'Bearer {GEMINI_API_KEY}'}
-#   url = "https://api.gemini.ai/v1/..."  # Replace with appropriate Gemini API endpoint
-
-#   # Adjust the request body and headers based on Gemini's API specifications
-#   data = {"prompt": prompt}
-#   response = requests.post(url, headers=headers, json=data)
-
-#   return response
+  response = requests.post(GEMINI_ENDPOINT, headers=headers, json=data)
+  return response
 
 
 def fetch_industry_benchmark_lca(product_name):
