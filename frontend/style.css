@@ -2,7 +2,7 @@
    Developer: Akhilesh Shukla
    Library: No library, Basic CSS
    Created on: 22/10/2023
-    */
+*/
 
 /*CSS Document*/
 
@@ -22,35 +22,41 @@ body {
   height: 100%;
 }
 
-#main {
+#main 
+{
   width: 100%;
 }
-#nav {
+#nav 
+{
   position: relative;
   display: flex;
   padding: 3vw 10vw;
   justify-content: space-between;
 }
-#nleft {
+#nleft 
+{
   display: flex;
   gap: 40px;
 }
 
-#nav a {
+#nav a 
+{
   font-size: 15px;
   text-decoration: none;
   color: #000;
   font-weight: 600;
 }
 
-#nav #centeratag {
+#nav #centeratag 
+{
   font-size: 18px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#hero {
+#hero 
+{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,29 +64,34 @@ body {
   width: 100%;
   padding: 0vw 10vw;
 }
-#sustain {
+#sustain 
+{
   width: 10vw;
 }
 
-#sustain p {
+#sustain p 
+{
   font-weight: 800;
   opacity: 0.5;
   text-transform: capitalize;
   font-size: 12px;
   margin: 10px 0;
 }
-#sustain #susimagewrapper {
+#sustain #susimagewrapper 
+{
   position: relative;
   overflow: hidden;
   width: 100%;
   height: 15vw;
 }
-#susimagewrapper img {
+#susimagewrapper img 
+{
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-#ephemeral {
+#ephemeral 
+{
   letter-spacing: -0.3vw;
   position: relative;
   width: 30vw;
