@@ -39,8 +39,7 @@ body {
   gap: 40px;
 }
 
-#nav a 
-{
+#nav a {
   font-size: 15px;
   text-decoration: none;
   color: #000;
@@ -69,8 +68,7 @@ body {
   width: 10vw;
 }
 
-#sustain p 
-{
+#sustain p {
   font-weight: 800;
   opacity: 0.5;
   text-transform: capitalize;
@@ -84,8 +82,7 @@ body {
   width: 100%;
   height: 15vw;
 }
-#susimagewrapper img 
-{
+#susimagewrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -97,7 +94,8 @@ body {
   width: 30vw;
   min-height: 42vw;
 }
-#imgntext {
+#imgntext 
+{
   width: fit-content;
   height: fit-content;
 }
@@ -115,7 +113,8 @@ body {
   width: 40%;
 }
 
-#ephemeral #headings {
+#ephemeral #headings 
+{
   top: -22%;
   left: -20%;
   position: absolute;
@@ -125,12 +124,14 @@ body {
   line-height: 1;
   font-weight: 400;
 }
-#visit {
+#visit 
+{
   display: flex;
   gap: 10px;
   align-items: center;
 }
-#circlev {
+#circlev 
+{
   border-radius: 50%;
   border: 1px solid #5e5e5e;
   align-items: center;
@@ -387,7 +388,8 @@ input:focus ~ .highlight {
   to 	{ width:0; background:transparent; }
 }
 
-#ftext {
+#ftext 
+{
   display: flex;
   flex-direction: column;
   align-items: center;
