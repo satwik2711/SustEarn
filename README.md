@@ -137,3 +137,8 @@ The server will start at \`http://127.0.0.1:8000/\`.
 - [Python Virtual Environment Documentation](https://docs.python.org/3/tutorial/venv.html)
 
 
+Project Summary:
+This project of empowering sustainable consumption through real-time product carbon footprinting stands as a beacon of hope in the fight against climate change. By equipping consumers with instant access to crucial environmental data, we have the potential to revolutionize purchasing habits and drive significant positive change throughout the marketplace. This initiative holds promise not only in promoting eco-conscious decision-making on an individual level but also in catalyzing broader shifts towards sustainability across industries and supply chains.
+
+
+![Uploading Screenshot 2024-05-09 at 2.06.46 PM.png…]()

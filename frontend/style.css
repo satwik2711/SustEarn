@@ -2,7 +2,7 @@
    Developer: Akhilesh Shukla
    Library: No library, Basic CSS
    Created on: 22/10/2023
-    */
+*/
 
 /*CSS Document*/
 
@@ -376,7 +376,8 @@ input:focus ~ .highlight {
   to 	{ width:0; background:transparent; }
 }
 
-#ftext {
+#ftext 
+{
   display: flex;
   flex-direction: column;
   align-items: center;

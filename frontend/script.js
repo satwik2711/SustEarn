@@ -1,13 +1,4 @@
-/* Original Design of website: Sheryians coding school
-   Developer: lakshya sandhu
-   Library: Shery.js */
-//Javascript Document
 
-//locomotive js- smooth scrolling
-
-// It wasn`t added as it was hindering the other animations
-
-// gsap - to animate
 gsap.from(".nlink", {
   stagger: 0.2,
   y: 10,
