@@ -24,10 +24,10 @@ Before you begin, ensure you have met the following requirements:
 
 1. **Clone the Repository**
 
-   \`\`\`sh
+   ```sh
    git clone https://github.com/yourusername/your-repo-name.git
    cd your-repo-name
-   \`\`\`
+   ```
 
 2. **Create and Activate a Virtual Environment (Optional)**
 
