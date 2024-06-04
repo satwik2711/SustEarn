@@ -145,6 +145,12 @@ import google.generativeai as genai
 
 genai.configure(api_key='AIzaSyBSseEKOSkx9ndTBli4XWfgH0RiL9g2R10')
 
+def fetch_emission_directly(product_name):
+    model = genai.GenerativeModel("gemini-pro")
+    prompt = f"Provide a numerical value only on the emission of the product '{product_name}'."
+    response = model.generate_content(prompt)
+    return response.text
+
 def fetch_life_cycle_stages(product_description, product_name):
     model = genai.GenerativeModel("gemini-pro")
     prompt = f"Given a product description '{product_description}', list the main life cycle stages of the product- '{product_name}'."
@@ -190,6 +196,15 @@ def calculate_weighted_average_emission(x_values, weights):
     weighted_sum = sum(x_values[key] * weights[key] for key in x_values)
     total_weight = sum(weights.values())
     return weighted_sum / total_weight if total_weight else None
+
+@api_view(['POST'])
+def get_emission(request):
+    product_name = request.data.get('name')
+    if not product_name:
+        return Response({'error': 'Missing data'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    emission = fetch_emission_directly(product_name)
+    return Response({'emission': emission})
 
 
 @api_view(['POST'])
