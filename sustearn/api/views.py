@@ -143,7 +143,7 @@ import re
 
 import google.generativeai as genai
 
-genai.configure(api_key='AIzaSyCr3BXiE3eqOSGGZe6UK0GUkgKaeHlOEBQ')
+genai.configure(api_key='AIzaSyBSseEKOSkx9ndTBli4XWfgH0RiL9g2R10')
 
 def fetch_life_cycle_stages(product_description, product_name):
     model = genai.GenerativeModel("gemini-pro")
