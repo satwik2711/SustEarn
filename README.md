@@ -1,3 +1,4 @@
+
 # README
 
 ## Project Overview
@@ -22,36 +23,39 @@ Before you begin, ensure you have met the following requirements:
 ## Installation
 
 1. **Clone the Repository**
+
    \`\`\`sh
    git clone https://github.com/yourusername/your-repo-name.git
    cd your-repo-name
    \`\`\`
 
 2. **Create and Activate a Virtual Environment (Optional)**
+
    \`\`\`sh
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scriptsctivate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    \`\`\`
 
 3. **Install Dependencies**
+
    \`\`\`sh
    pip install -r requirements.txt
    \`\`\`
 
 4. **Set Up Environment Variables**
+
    Create a \`.env\` file in the root directory and add your Google API key:
+   
    \`\`\`env
    GOOGLE_API_KEY=your_google_api_key
    \`\`\`
 
-5. **Run Migrations**
-   \`\`\`sh
-   python manage.py migrate
-   \`\`\`
+
 
 ## Running the Server
 
 To start the development server, run:
+
 \`\`\`sh
 python manage.py runserver
 \`\`\`
@@ -67,6 +71,7 @@ The server will start at \`http://127.0.0.1:8000/\`.
 **Method:** \`POST\`
 
 **Request Payload:**
+
 \`\`\`json
 {
     "name": "Product Name",
@@ -75,6 +80,7 @@ The server will start at \`http://127.0.0.1:8000/\`.
 \`\`\`
 
 **Response:**
+
 \`\`\`json
 {
     "life_cycle_stages": "Stage 1, Stage 2, Stage 3"
@@ -88,6 +94,7 @@ The server will start at \`http://127.0.0.1:8000/\`.
 **Method:** \`POST\`
 
 **Request Payload:**
+
 \`\`\`json
 {
     "name": "Product Name",
@@ -101,6 +108,7 @@ The server will start at \`http://127.0.0.1:8000/\`.
 \`\`\`
 
 **Response:**
+
 \`\`\`json
 {
     "weighted_average_emission": 123.45,
@@ -115,6 +123,7 @@ The server will start at \`http://127.0.0.1:8000/\`.
 **Method:** \`POST\`
 
 **Request Payload:**
+
 \`\`\`json
 {
     "name": "Product Name"
@@ -122,6 +131,7 @@ The server will start at \`http://127.0.0.1:8000/\`.
 \`\`\`
 
 **Response:**
+
 \`\`\`json
 {
     "emission": 150.75
@@ -136,9 +146,3 @@ The server will start at \`http://127.0.0.1:8000/\`.
 - [Google Generative AI Documentation](https://cloud.google.com/generative-ai)
 - [Python Virtual Environment Documentation](https://docs.python.org/3/tutorial/venv.html)
 
-
-Project Summary:
-This project of empowering sustainable consumption through real-time product carbon footprinting stands as a beacon of hope in the fight against climate change. By equipping consumers with instant access to crucial environmental data, we have the potential to revolutionize purchasing habits and drive significant positive change throughout the marketplace. This initiative holds promise not only in promoting eco-conscious decision-making on an individual level but also in catalyzing broader shifts towards sustainability across industries and supply chains.
-
-
-![Uploading Screenshot 2024-05-09 at 2.06.46 PM.png…]()
