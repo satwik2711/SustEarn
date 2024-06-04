@@ -31,24 +31,24 @@ Before you begin, ensure you have met the following requirements:
 
 2. **Create and Activate a Virtual Environment (Optional)**
 
-   \`\`\`sh
+   ```sh
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
-   \`\`\`
+   ```
 
 3. **Install Dependencies**
 
-   \`\`\`sh
+   ```sh
    pip install -r requirements.txt
-   \`\`\`
+   ```
 
 4. **Set Up Environment Variables**
 
-   Create a \`.env\` file in the root directory and add your Google API key:
+   Create a `.env` file in the root directory and add your Google API key:
    
-   \`\`\`env
+   ```env
    GOOGLE_API_KEY=your_google_api_key
-   \`\`\`
+   ```
 
 
 
@@ -56,46 +56,46 @@ Before you begin, ensure you have met the following requirements:
 
 To start the development server, run:
 
-\`\`\`sh
+```sh
 python manage.py runserver
-\`\`\`
+```
 
-The server will start at \`http://127.0.0.1:8000/\`.
+The server will start at `http://127.0.0.1:8000/`.
 
 ## API Endpoints
 
 ### Get Life Cycle Stages
 
-**URL:** \`api/lcs\`
+**URL:** `api/lcs`
 
-**Method:** \`POST\`
+**Method:** `POST`
 
 **Request Payload:**
 
-\`\`\`json
+```json
 {
     "name": "Product Name",
     "description": "Product Description"
 }
-\`\`\`
+```
 
 **Response:**
 
-\`\`\`json
+```json
 {
     "life_cycle_stages": "Stage 1, Stage 2, Stage 3"
 }
-\`\`\`
+```
 
 ### Calculate Footprint
 
-**URL:** \`api/calculate/\`
+**URL:** `api/calculate/`
 
-**Method:** \`POST\`
+**Method:** `POST`
 
 **Request Payload:**
 
-\`\`\`json
+```json
 {
     "name": "Product Name",
     "life_cycle_stages": ["Stage 1", "Stage 2", "Stage 3"],
@@ -105,38 +105,38 @@ The server will start at \`http://127.0.0.1:8000/\`.
         "Stage 3": 0.3
     }
 }
-\`\`\`
+```
 
 **Response:**
 
-\`\`\`json
+```json
 {
     "weighted_average_emission": 123.45,
     "optimized_emission": 110.00
 }
-\`\`\`
+```
 
 ### Get Emission
 
-**URL:** \`api/emission/\`
+**URL:** `api/emission/`
 
-**Method:** \`POST\`
+**Method:** `POST`
 
 **Request Payload:**
 
-\`\`\`json
+```json
 {
     "name": "Product Name"
 }
-\`\`\`
+```
 
 **Response:**
 
-\`\`\`json
+```json
 {
     "emission": 150.75
 }
-\`\`\`
+```
 
 
 
