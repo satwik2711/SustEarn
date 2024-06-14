@@ -14,7 +14,7 @@ genai.configure(api_key='AIzaSyBSseEKOSkx9ndTBli4XWfgH0RiL9g2R10')
 
 def fetch_emission_directly(product_name):
     model = genai.GenerativeModel("gemini-pro")
-    prompt = f"Provide a numerical value only on the emission of the product '{product_name}'."
+    prompt = f"Provide a numerical value only on the emission of the product '{product_name}', no text required, just integer output."
     response = model.generate_content(prompt)
     return response.text
 
@@ -51,8 +51,8 @@ def get_x_values_from_llm(product_name, life_cycle_stages):
 
 
 def optimize_emission(weighted_average_emission, industry_lca):
-    lower_bound = industry_lca * (-20 / 100)
-    upper_bound = industry_lca * (20 / 100)
+    lower_bound = industry_lca * (-10 / 100)
+    upper_bound = industry_lca * (10/ 100)
     if lower_bound < weighted_average_emission < upper_bound:
         return weighted_average_emission
     else:
