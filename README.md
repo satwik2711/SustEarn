@@ -3,7 +3,7 @@
 
 ## Project Overview
 
-This project is a Django-based web application that calculates the environmental footprint of products using Life-Cycle Assessment (LCA) methods. It provides endpoints for fetching life cycle stages, calculating weighted average emissions, optimizing emissions, and fetching direct emissions.
+SustEarn is a third-party Django-based API solution developed for Cleantech Mart (IDEALORS B2B PVT LTD) to accurately calculate emissions for sustainable products. Leveraging NLP, LLM, and Prompt Engineering, this project promotes responsible consumerism for a greener environment. The API optimizes emission calculations using industry benchmark Life Cycle Assessment (LCA) data and advanced AI techniques, ensuring accuracy within a 20% error margin. It provides endpoints for fetching life cycle stages, calculating weighted average emissions, optimizing emissions, and fetching direct emissions.
 
 ## Features
 
